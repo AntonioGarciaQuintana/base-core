@@ -1,17 +1,21 @@
 package com.base.backendcore.util.payload;
 
+import com.base.backendcore.model.Role;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SignUpRequest {
 
     @NotBlank
-    @Size(min = 4, max = 40)
+    @Size( max = 50)
     private String name;
 
     @NotBlank
-    @Size(min = 3, max = 15)
+    @Size( max = 50)
     private String username;
 
     @NotBlank
@@ -20,8 +24,10 @@ public class SignUpRequest {
     private String email;
 
     @NotBlank
-    @Size(min = 6, max = 20)
+    @Size( max = 20)
     private String password;
+
+    private Set<Role> roles = new HashSet<>();
 
     public String getName() {
         return name;
@@ -53,5 +59,13 @@ public class SignUpRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
