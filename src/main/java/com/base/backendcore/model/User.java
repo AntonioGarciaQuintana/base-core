@@ -2,6 +2,7 @@ package com.base.backendcore.model;
 
 import com.base.backendcore.audit.DateAudit;
 import org.hibernate.annotations.NaturalId;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" }),
         @UniqueConstraint(columnNames = { "email" }) })
+@EntityListeners(AuditingEntityListener.class)
 public class User extends DateAudit {
 
     @Id

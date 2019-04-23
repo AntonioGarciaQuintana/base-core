@@ -1,18 +1,12 @@
 package com.base.backendcore.controller;
 
-import com.base.backendcore.model.Role;
-import com.base.backendcore.model.User;
-import com.base.backendcore.model.enums.RoleNameEnum;
+
 import com.base.backendcore.repository.RoleRepository;
 import com.base.backendcore.repository.UserRepository;
 import com.base.backendcore.security.JwtTokenProvider;
-import com.base.backendcore.util.exeption.AppException;
-import com.base.backendcore.util.payload.ApiResponse;
 import com.base.backendcore.util.payload.JwtAuthenticationResponse;
 import com.base.backendcore.util.payload.LoginRequest;
-import com.base.backendcore.util.payload.SignUpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,11 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import javax.validation.Valid;
-import java.net.URI;
-import java.util.Collections;
+
 
 @RestController
 @RequestMapping("/api/auth")

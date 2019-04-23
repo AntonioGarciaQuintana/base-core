@@ -4,6 +4,7 @@ import com.base.backendcore.model.Role;
 import com.base.backendcore.model.User;
 import com.base.backendcore.model.enums.RoleNameEnum;
 import com.base.backendcore.repository.UserRepository;
+import com.base.backendcore.service.UserService;
 import com.base.backendcore.util.exeption.AppException;
 import com.base.backendcore.util.payload.ApiResponse;
 import com.base.backendcore.util.payload.SignUpRequest;
@@ -26,20 +27,20 @@ import java.util.Collections;
 public class UserController {
 
     @Autowired
-    UserRepository userRepository;
-
+    private UserService userService;
 
     @PostMapping("/signup")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+        if (userService.existsByUsername(signUpRequest.getUsername())) {
             return new ResponseEntity(new ApiResponse(false, "Username is already taken!"), HttpStatus.BAD_REQUEST);
         }
 
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+        if (userService.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"), HttpStatus.BAD_REQUEST);
         }
 
+        userService.saveUser(signUpRequest);
         // Creating user's account
        /* User user = new User(signUpRequest.getName(), signUpRequest.getUsername(), signUpRequest.getEmail(),
                 signUpRequest.getPassword());
